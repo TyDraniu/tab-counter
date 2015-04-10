@@ -1,0 +1,12 @@
+{
+  "title": "Tab Counter",
+  "name": "tab-counter",
+  "version": "0.0.1",
+  "description": "Hovering New Tab Button gives the message on number of opened tabs",
+  "main": "index.js",
+  "author": "TyDraniu",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "MIT"
+}
