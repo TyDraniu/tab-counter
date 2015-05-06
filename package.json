@@ -1,7 +1,7 @@
 {
   "title": "Tab Counter",
   "name": "tab-counter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Hovering New Tab Button gives the message on number of opened tabs",
   "main": "index.js",
   "author": "TyDraniu",

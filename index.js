@@ -8,45 +8,32 @@ var _ = require("sdk/l10n").get;
 var tb = 0;
 
 
-function TN() {
-	var tabs = require("sdk/tabs");
-	var t = 0;
-	for (let tab of tabs) {
-			t++;
-	}
-	return t;
+function TabNumber() {
+	return tabs.length;
 }
 
-function SetTooltip(window)
+function SetTooltip(window, tn)
 {
 	var newtab = window.document.getElementById('new-tab-button');
 	if (newtab != null) {
-		//var tn = TabsNumber();
-		tb = TN();
-		if (tb == 1) {
-			newtab.setAttribute('tooltiptext', _('You have 1 tab', 1));
-		} 
-		else {
-			newtab.setAttribute('tooltiptext', _('You have %d tabs', tb));
-		}
+		tb = tn;
+		newtab.setAttribute('tooltiptext', _("tooltiptext", tn));
 	}
 }
 
 for (let window of windows.browserWindows)
 {
-	SetTooltip(viewFor(window));
+	SetTooltip(viewFor(window), TabNumber());
 }
 
 windows.browserWindows.on('open', function(window) {
-	SetTooltip(viewFor(window));
+	SetTooltip(viewFor(window), TabNumber());
 });
 
 tabs.on('open', function(tab) {
-	var window = viewFor(windows.browserWindows.activeWindow);
-	SetTooltip(window);
+	SetTooltip(viewFor(windows.browserWindows.activeWindow), ++tb);
 });
 
 tabs.on('close', function(tab) {
-	var window = viewFor(windows.browserWindows.activeWindow);
-	SetTooltip(window);
+	SetTooltip(viewFor(windows.browserWindows.activeWindow), --tb);
 });
